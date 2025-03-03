@@ -87,7 +87,7 @@ const UserInterface: React.FC<UserInterfaceProps> = ({backendName}) => {
                 users.filter((user) => user.id != userId)
             )
         } catch(e) {
-
+            console.error("Error delete user",e)
         }
     }
 
