@@ -79,6 +79,18 @@ const UserInterface: React.FC<UserInterfaceProps> = ({backendName}) => {
         }
     }
 
+    // delete user
+    const deleteUser = async (userId: number) => {
+        try {
+            await axios.delete(`${apiUrl}/api/${backendName}/users/${userId}`)
+            setUsers(
+                users.filter((user) => user.id != userId)
+            )
+        } catch(e) {
+
+        }
+    }
+
     return (
         <div className={`user-interface ${bgColor} ${backendName} w-full max-w-md p-4 my-4 rounded shadow`}>
             <img src={`/${backendName}logo.svg`} alt={`${backendName} Logo`} className="w-20 h-20 mb-6 mx-auto" />
@@ -110,9 +122,9 @@ const UserInterface: React.FC<UserInterfaceProps> = ({backendName}) => {
                 {users?.map((user) => (
                     <div key={user.id} className="flex items-center justify-between bg-white p-4 rounded-lg shadow">
                         <CardComponent card={user} />
-                        {/* <button onClick={() => deleteUser(user.id)} className={`${btnColor} text-white py-2 px-4 rounded`}>
+                        <button onClick={() => deleteUser(user.id)} className={`${btnColor} text-white py-2 px-4 rounded cursor-pointer`}>
                             Delete user
-                        </button> */}
+                        </button>
                     </div>
                 )
                 )}
